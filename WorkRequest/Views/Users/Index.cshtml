@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@if (ViewBag.admin == "Yes")
+{
+    <h1>Welcome @ViewBag.Name. Now you can manage Request.</h1>
+    <h3>
+        <li>@Html.ActionLink("Manage Request", "Index", "AdminRequests")</li>
+    </h3>
+}
+else
+{
+    <h1>Welcome @ViewBag.Name. Now you can see Request.</h1>
+    <h3>
+        <li>@Html.ActionLink("Manage Request", "Index", "EmployeeRequests")</li>
+    </h3>
+}
+

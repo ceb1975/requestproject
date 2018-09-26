@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeRequest.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+    <Property Name="Del_Flag" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WorkRequest.dbo.v_EmployeeRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="v_EmployeeRequest">
+    <Key>
+      <PropertyRef Name="RequestID" />
+      <PropertyRef Name="Del_Flag" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="RequestID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Del_Flag" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="EmployeeRequestStoreContainer">
+    <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="v_EmployeeRequest" EntityType="Self.v_EmployeeRequest" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_EmployeeRequest].[RequestID] AS [RequestID], 
+    [v_EmployeeRequest].[Description] AS [Description], 
+    [v_EmployeeRequest].[Del_Flag] AS [Del_Flag], 
+    [v_EmployeeRequest].[Status] AS [Status]
+    FROM [dbo].[v_EmployeeRequest] AS [v_EmployeeRequest]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
